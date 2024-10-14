@@ -1,5 +1,6 @@
 // import cors from 'cors'
-import express, { Express } from 'express'
+import type { Express } from 'express'
+import express from 'express'
 // import helmet from 'helmet'
 
 import { requestLogger } from './middleware/requestLogger'
@@ -11,8 +12,8 @@ import { initFrontend } from './middleware/frontend'
 
 const server: Express = express()
 
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
+server.use(express.json())
+server.use(express.urlencoded({ extended: true }))
 
 // const corsOrigin = getCorsOrigin()
 

@@ -1,9 +1,10 @@
 import { randomUUID } from 'node:crypto'
-import { IncomingMessage, ServerResponse } from 'node:http'
+import type { IncomingMessage, ServerResponse } from 'node:http'
 
-import { Request, RequestHandler, Response } from 'express'
-import { LevelWithSilent } from 'pino'
-import { CustomAttributeKeys, Options, pinoHttp } from 'pino-http'
+import type { Request, RequestHandler, Response } from 'express'
+import type { LevelWithSilent } from 'pino'
+import type { CustomAttributeKeys, Options } from 'pino-http'
+import { pinoHttp } from 'pino-http'
 
 import { isDev } from '@server/config'
 

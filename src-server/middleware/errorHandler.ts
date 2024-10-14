@@ -1,4 +1,4 @@
-import { ErrorRequestHandler, RequestHandler } from 'express'
+import type { ErrorRequestHandler, RequestHandler } from 'express'
 
 const unexpectedRequest: RequestHandler = (req, res) => {
     res.sendStatus(404)

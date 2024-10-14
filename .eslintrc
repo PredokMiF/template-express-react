@@ -1,0 +1,22 @@
+{
+    "root": true,
+    "rules": {
+        "@typescript-eslint/consistent-type-imports": "error"
+    },
+    "settings": {
+        "import/resolver" : {
+            "typescript": {
+                "alwaysTryTypes": true,
+                "project": "./tsconfig.json"
+            },
+            "alias": {
+                "map": [
+                    ["@base", "./src-base"],
+                    ["@client", ".src-client"],
+                    ["@server", "./src-server"]
+                ],
+                "extensions" : [".ts", ".tsx", ".js", ".jsx"]
+            }
+        }
+    }
+}

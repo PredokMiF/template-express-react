@@ -1,0 +1,6 @@
+{
+    "extends": ["@i-novus/eslint-config/react", "../.eslintrc"],
+    "parserOptions": {
+        "project": true
+    }
+}

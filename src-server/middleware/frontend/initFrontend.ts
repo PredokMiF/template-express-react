@@ -2,6 +2,7 @@ import type { Express, Request } from 'express'
 
 import { isDev } from '@server/config'
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export async function initFrontend(server: Express) {
     let render: (req: Request) => Promise<string>
 

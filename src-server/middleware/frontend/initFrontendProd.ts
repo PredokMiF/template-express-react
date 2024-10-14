@@ -11,6 +11,7 @@ export async function initFrontendProd(server: Express) {
 
     server.use('/', sirv(DIST_STATIC_ROOT_PATH, { extensions: [] }))
 
+    // eslint-disable-next-line @typescript-eslint/require-await
     async function render() {
         return template
     }
