@@ -11,7 +11,7 @@
         "start2": "cross-env NODE_ENV=production node dist/src-server/index.js",
         "start:windows": "chcp 65001&&yarn run start",
         "check": "yarn run lint&&yarn run ts:check",
-        "lint": "eslint src-base src-client src-server --fix",
+        "lint": "eslint src-base src-server src-client",
         "ts:check": "tsc -b --noEmit&&npm run tsc:trash:clean",
         "build:all": "rimraf dist&&yarn run build:front&&yarn run build:server&&npm run tsc:trash:clean",
         "build:server": "tsc -b&&tsc-alias -p tsconfig.server.json",
