@@ -1,9 +1,11 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-import type { Express } from 'express'
 import sirv from 'sirv'
-import { DIST_STATIC_ROOT_PATH } from '@server/config'
+
+import { DIST_STATIC_ROOT_PATH } from '../../config'
+
+import type { Express } from 'express'
 
 export async function initFrontendProd(server: Express) {
     const template = await fs.readFile(path.resolve(DIST_STATIC_ROOT_PATH, 'index.html'), 'utf-8')

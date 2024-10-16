@@ -2,8 +2,9 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import { createServer as createViteServer } from 'vite'
-import type { Express, Request } from 'express'
 import { PROJECT_ROOT_PATH } from '@server/config'
+
+import type { Express, Request } from 'express'
 
 export async function initFrontendDev(server: Express) {
     const vite = await createViteServer({
