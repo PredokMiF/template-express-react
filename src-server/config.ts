@@ -26,7 +26,13 @@ dotenv.config({ path: join(PROJECT_ROOT_PATH, '.env') })
 const configValidationResult = z.object({
     SITE_URL: z.string().default('http://localhost:8080'),
     HOST: z.string().default('localhost'),
-    PORT: z.coerce.number().int().positive().finite().safe().default(8080),
+    PORT: z.coerce
+        .number()
+        .int()
+        .positive()
+        .finite()
+        .safe()
+        .default(8080),
 }).transform((o) => {
     return ({
         siteUrl: o.SITE_URL,

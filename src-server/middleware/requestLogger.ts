@@ -4,7 +4,6 @@ import { IncomingMessage, ServerResponse } from 'node:http'
 import { Request, RequestHandler, Response } from 'express'
 import { LevelWithSilent } from 'pino'
 import { CustomAttributeKeys, Options, pinoHttp } from 'pino-http'
-
 import { isDev } from '@server/config'
 
 type PinoCustomProps = {
@@ -35,6 +34,7 @@ const genReqId = (req: IncomingMessage, res: ServerResponse<IncomingMessage>) =>
     return id
 }
 
+// eslint-disable-next-line complexity
 const customLogLevel = (req: IncomingMessage, res: ServerResponse, err?: Error): LevelWithSilent => {
     if (res.statusCode === 401 || res.statusCode === 404) {
         return 'silent'

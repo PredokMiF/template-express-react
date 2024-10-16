@@ -11,8 +11,8 @@ import { initFrontend } from './middleware/frontend'
 
 const server: Express = express()
 
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
+server.use(express.json())
+server.use(express.urlencoded({ extended: true }))
 
 // const corsOrigin = getCorsOrigin()
 

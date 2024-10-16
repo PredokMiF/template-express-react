@@ -3,7 +3,6 @@ import path from 'node:path'
 
 import type { Express } from 'express'
 import sirv from 'sirv'
-
 import { DIST_STATIC_ROOT_PATH } from '@server/config'
 
 export async function initFrontendProd(server: Express) {
