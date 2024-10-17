@@ -1,9 +1,9 @@
-import { dirname, resolve, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { dirname, resolve, join } from 'node:path'
 
-import dotenv from 'dotenv'
-import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
+import { z } from 'zod'
+import dotenv from 'dotenv'
 
 import { getNearestPackage } from './utils'
 
@@ -26,7 +26,13 @@ dotenv.config({ path: join(PROJECT_ROOT_PATH, '.env') })
 const configValidationResult = z.object({
     SITE_URL: z.string().default('http://localhost:8080'),
     HOST: z.string().default('localhost'),
-    PORT: z.coerce.number().int().positive().finite().safe().default(8080),
+    PORT: z.coerce
+        .number()
+        .int()
+        .positive()
+        .finite()
+        .safe()
+        .default(8080),
 }).transform((o) => {
     return ({
         siteUrl: o.SITE_URL,

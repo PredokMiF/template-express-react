@@ -1,9 +1,9 @@
-import { randomUUID } from 'node:crypto'
 import { IncomingMessage, ServerResponse } from 'node:http'
+import { randomUUID } from 'node:crypto'
 
-import { Request, RequestHandler, Response } from 'express'
-import { LevelWithSilent } from 'pino'
 import { CustomAttributeKeys, Options, pinoHttp } from 'pino-http'
+import { LevelWithSilent } from 'pino'
+import { Request, RequestHandler, Response } from 'express'
 
 import { isDev } from '@server/config'
 
@@ -35,6 +35,7 @@ const genReqId = (req: IncomingMessage, res: ServerResponse<IncomingMessage>) =>
     return id
 }
 
+// eslint-disable-next-line complexity
 const customLogLevel = (req: IncomingMessage, res: ServerResponse, err?: Error): LevelWithSilent => {
     if (res.statusCode === 401 || res.statusCode === 404) {
         return 'silent'

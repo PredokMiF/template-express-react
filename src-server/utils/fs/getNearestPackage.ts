@@ -1,5 +1,5 @@
-import fs from 'node:fs'
 import { sep } from 'node:path'
+import fs from 'node:fs'
 
 // Ищет ближайшую к корню папку с package.json
 export function getNearestPackage(path: string) {

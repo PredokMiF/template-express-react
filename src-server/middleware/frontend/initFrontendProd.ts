@@ -1,8 +1,8 @@
-import fs from 'node:fs/promises'
 import path from 'node:path'
+import fs from 'node:fs/promises'
 
-import type { Express } from 'express'
 import sirv from 'sirv'
+import type { Express } from 'express'
 
 import { DIST_STATIC_ROOT_PATH } from '@server/config'
 
