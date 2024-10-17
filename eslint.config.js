@@ -46,7 +46,14 @@ export default tseslint.config(
             'import/order': ['error', {
                 'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
                 'newlines-between': 'always',
-                'alphabetize': {'order': 'desc', 'orderImportKind': 'desc'},
+                'pathGroups': [
+                    {
+                        'pattern': '@**/**',
+                        'group': 'internal'
+                    }
+                ],
+                "pathGroupsExcludedImportTypes": ["internal"]
+
                 }],
             'import/newline-after-import': ['error', { 'count': 1, }],
             'import/extensions': ['error', 'ignorePackages', {

@@ -1,4 +1,5 @@
 import type { Express, Request } from 'express'
+
 import { isDev } from '@server/config'
 
 export async function initFrontend(server: Express) {

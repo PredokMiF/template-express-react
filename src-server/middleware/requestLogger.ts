@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto'
 import { CustomAttributeKeys, Options, pinoHttp } from 'pino-http'
 import { LevelWithSilent } from 'pino'
 import { Request, RequestHandler, Response } from 'express'
+
 import { isDev } from '@server/config'
 
 type PinoCustomProps = {
