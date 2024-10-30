@@ -15,4 +15,11 @@ export default defineConfig({
             '@client': path.resolve(dirname, 'src-client'),
         },
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler',
+            },
+        },
+    }
 })
