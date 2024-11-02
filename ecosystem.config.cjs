@@ -3,8 +3,7 @@
 module.exports = {
     apps: [{
         name: 'app',
-        script: 'dist/src-server/index.js',
-        node_args: '--experimental-modules',
+        script: 'dist/server/index.js',
         instances: 1,
         autorestart: true,
         watch: false,

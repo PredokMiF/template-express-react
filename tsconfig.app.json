@@ -3,9 +3,10 @@
         "target": "ES2020",
         "module": "ESNext",
         "noEmit": true,
+        "outDir": "dist",
         "paths": {
             "@base/*": ["./src-base/*"],
-            "@client/*": ["./src-client/*"]
+            "@/*": ["./src-client/*"]
         },
         "lib": ["ES2020", "DOM", "DOM.Iterable"],
         "types": ["vite/client"],

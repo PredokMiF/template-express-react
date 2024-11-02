@@ -5,7 +5,7 @@ import { CustomAttributeKeys, Options, pinoHttp } from 'pino-http'
 import { LevelWithSilent } from 'pino'
 import { Request, RequestHandler, Response } from 'express'
 
-import { isDev } from '@server/config'
+import { isDev } from '@/config'
 
 type PinoCustomProps = {
     err: Error
@@ -62,9 +62,9 @@ const customLogLevel = (req: IncomingMessage, res: ServerResponse, err?: Error):
     ) {
         return 'silent'
     }
-    if (req.method === 'GET' && res.statusCode === 200) {
-        console.log(JSON.stringify(req.headers.accept))
-    }
+    // if (req.method === 'GET' && res.statusCode === 200) {
+    //     console.log(JSON.stringify(req.headers.accept))
+    // }
 
     return 'info'
 }

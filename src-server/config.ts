@@ -5,7 +5,7 @@ import { fromZodError } from 'zod-validation-error'
 import { z } from 'zod'
 import dotenv from 'dotenv'
 
-import { getNearestPackage } from './utils'
+import { getNearestPackage } from '@/utils'
 
 export const PROJECT_ROOT_PATH = getNearestPackage(dirname(fileURLToPath(import.meta.url)))
 
@@ -24,7 +24,7 @@ export const isDev = !isProd
 dotenv.config({ path: join(PROJECT_ROOT_PATH, '.env') })
 
 const configValidationResult = z.object({
-    SITE_URL: z.string().default('http://localhost:8080'),
+    SITE_URL: z.string().optional(),
     HOST: z.string().default('localhost'),
     PORT: z.coerce
         .number()
@@ -35,7 +35,7 @@ const configValidationResult = z.object({
         .default(8080),
 }).transform((o) => {
     return ({
-        siteUrl: o.SITE_URL,
+        siteUrl: o.SITE_URL || `http://localhost:${o.PORT}`,
         app: {
             host: o.HOST,
             port: o.PORT,

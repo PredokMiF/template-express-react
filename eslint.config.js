@@ -50,20 +50,18 @@ export default tseslint.config(
                 'newlines-between': 'always',
                 'pathGroups': [
                     {
-                        'pattern': '@**/**',
-                        'group': 'internal'
-                    }
+                        pattern: '@base/**',
+                        group: 'parent'
+                    },
+                    {
+                        pattern: '@/**',
+                        group: 'parent'
+                    },
                 ],
                 "pathGroupsExcludedImportTypes": ["internal"]
 
-                }],
+            }],
             'import/newline-after-import': ['error', { 'count': 1, }],
-            'import/extensions': ['error', 'ignorePackages', {
-                'js': 'never',
-                'jsx': 'never',
-                'ts': 'never',
-                'tsx': 'never',
-            } ],
             'import/no-default-export': 'error',
             // Дефолтного экспорта быть не должно
             'import/prefer-default-export': 'off',
@@ -131,10 +129,8 @@ export default tseslint.config(
                 'eslint-import-resolver-typescript': ['.ts', 'tsx'],
             },
             'import/resolver': {
-              'typescript': true
+                'typescript': true
             },
-          },
+        },
     },
 )
-
-

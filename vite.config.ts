@@ -7,12 +7,16 @@ import react from '@vitejs/plugin-react'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+// eslint-disable-next-line import/no-default-export,no-restricted-exports
 export default defineConfig({
+    build: {
+        outDir: 'dist/static',
+    },
     plugins: [react()],
     resolve: {
         alias: {
             '@base': path.resolve(dirname, 'src-base'),
-            '@client': path.resolve(dirname, 'src-client'),
+            '@': path.resolve(dirname, 'src-client'),
         },
     },
     css: {

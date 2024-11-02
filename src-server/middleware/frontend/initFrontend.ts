@@ -1,6 +1,6 @@
 import type { Express, Request } from 'express'
 
-import { isDev } from '@server/config'
+import { isDev } from '@/config'
 
 export async function initFrontend(server: Express) {
     let render: (req: Request) => Promise<string>

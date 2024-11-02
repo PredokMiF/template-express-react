@@ -1,8 +1,8 @@
 import process from 'node:process'
 
-import { server } from './server'
-import { logger } from './logger'
-import { config } from './config'
+import { server } from '@/server'
+import { logger } from '@/logger'
+import { config } from '@/config'
 
 const { siteUrl, app: { host, port } } = config
 
