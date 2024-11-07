@@ -23,7 +23,7 @@
         "url": "https://github.com/PredokMiF/template-express-react.git"
     },
     "engines": {
-        "node": ">=22.11.0"
+        "node": ">=18.20.0"
     },
     "dependencies": {
         "cross-env": "^7.0.3",
