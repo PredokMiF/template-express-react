@@ -2,6 +2,8 @@ import { Request, Response, NextFunction, RequestHandler } from 'express'
 import z from 'zod'
 import { fromZodError } from 'zod-validation-error'
 
+import { UserRole, User } from '@base/entity'
+
 import { HttpError } from './HttpError'
 
 const encapsulated = (() => {
@@ -117,4 +119,32 @@ export function useBody<T extends z.AnyZodObject>(schema: T): z.infer<T> {
     const error = fromZodError(validationResult.error, { prefix: 'Query param(s) is not valid' })
 
     throw HttpError.BadRequest(error)
+}
+
+export function useAuthSafe(): User | null {
+    const [req] = isUseSync('useQueryParams')
+
+    return req.session.user || null
+}
+
+export function useAuth(role?: UserRole | UserRole[]): User {
+    const user = useAuthSafe()
+
+    if (!user) {
+        throw HttpError.Unauthorized()
+    }
+
+    if (!role) {
+        return user
+    }
+
+    const hasRole = typeof role === 'string'
+        ? user.roles.includes(role)
+        : user.roles.some(userRole => role.includes(userRole))
+
+    if (!hasRole) {
+        throw HttpError.Forbidden(`Need role: ${JSON.stringify(role)}, but user have ${JSON.stringify(user.roles)}`)
+    }
+
+    return user
 }

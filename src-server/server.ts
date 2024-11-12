@@ -1,5 +1,6 @@
 // import cors from 'cors'
 import express, { Express } from 'express'
+import session from 'express-session'
 // import helmet from 'helmet'
 
 import { config } from '@/config'
@@ -17,6 +18,16 @@ server.disable('x-powered-by')
 if (config.app.trustProxyCount > 0) {
     server.set('trust proxy', config.app.trustProxyCount)
 }
+
+server.use(session({
+    secret: config.app.secret,
+    resave: false,
+    saveUninitialized: false,
+    // Set domain in production
+    // Set secure in production
+    // Set httpOnly
+    // Set signed
+}))
 
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))

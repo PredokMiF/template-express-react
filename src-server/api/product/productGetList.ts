@@ -1,12 +1,14 @@
 import { Filter } from 'mongodb'
 
 import { apiProductGetListQueryParamsSchema, apiProductGetListResponseSchema } from '@base/api'
-import { asyncRoute, useQueryParams } from '@/utils'
+import { asyncRoute, useAuth, useQueryParams } from '@/utils'
 import { ProductDto, productService } from '@/service/product'
 
 import { productRouter } from './router'
 
 productRouter.get('/list', asyncRoute(apiProductGetListResponseSchema, async () => {
+    useAuth()
+
     const { search } = useQueryParams(apiProductGetListQueryParamsSchema)
     const filter: Filter<ProductDto> = search
         ? {

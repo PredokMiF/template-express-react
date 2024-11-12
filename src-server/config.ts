@@ -30,6 +30,7 @@ const configValidationResult = z.object({
     HOST: z.string().default('0.0.0.0'),
     PORT: numberSchema.positive().default(8080),
     SITE_URL: z.string().optional(),
+    SESSION_SECRET: z.string(),
     TRUST_PROXY_COUNT: numberSchema.nonnegative().default(0),
     MONGODB_URI: z.string(),
 }).transform((o) => {
@@ -38,6 +39,7 @@ const configValidationResult = z.object({
         app: {
             host: o.HOST,
             port: o.PORT,
+            secret: o.SESSION_SECRET,
             trustProxyCount: o.TRUST_PROXY_COUNT,
         },
         mongodb: {
