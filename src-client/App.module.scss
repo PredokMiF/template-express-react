@@ -1,0 +1,19 @@
+.app {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+}
+
+:global(.form) {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    grid-template-rows: 1fr;
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+
+    button {
+        grid-column: span 2;
+    }
+}

@@ -1,5 +1,6 @@
 import process from 'node:process'
 
+import { closeMongoClientConnection } from '@/store/mongoDb'
 import { server } from '@/server'
 import { logger } from '@/logger'
 import { config } from '@/config'
@@ -17,8 +18,27 @@ process.on('unhandledRejection', (reason, promise) => {
 process.on('uncaughtException', (err, origin) => {
     logger.fatal(`Uncaught exception: ${err}\n Exception origin: ${origin}`)
 
-    app.close(() => {
-        logger.info('server closed on uncaughtException')
+    const closingDb = closeMongoClientConnection().then(() => {
+        logger.info('DB connection closed on uncaughtException')
+    })
+
+    const closingWebApp = new Promise((resolve, reject) => {
+        app.close((e) => {
+            if (e) {
+                logger.warn(`Web-app cant close on uncaughtException ${(e as unknown as Error).toString()}`)
+                reject()
+            } else {
+                logger.info('Web-app closed on uncaughtException')
+                resolve(null)
+            }
+
+        })
+    })
+
+    Promise.all([
+        closingDb,
+        closingWebApp,
+    ]).then(() => {
         process.exit()
     })
 
@@ -30,8 +50,27 @@ process.on('uncaughtException', (err, origin) => {
 const onCloseSignal = () => {
     logger.info('sigint received, shutting down')
 
-    app.close(() => {
-        logger.info('server closed on onCloseSignal')
+    const closingDb = closeMongoClientConnection().then(() => {
+        logger.info('DB connection closed on shutting down signal')
+    })
+
+    const closingWebApp = new Promise((resolve, reject) => {
+        app.close((e) => {
+            if (e) {
+                logger.warn(`Web-app cant close on uncaughtException ${(e as unknown as Error).toString()}`)
+                reject()
+            } else {
+                logger.info('Web-app closed on shutting down signal')
+                resolve(null)
+            }
+
+        })
+    })
+
+    Promise.all([
+        closingDb,
+        closingWebApp,
+    ]).then(() => {
         process.exit()
     })
 

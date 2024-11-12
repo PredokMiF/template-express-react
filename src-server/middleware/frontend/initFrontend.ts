@@ -16,6 +16,10 @@ export async function initFrontend(server: Express) {
     }
 
     server.get('*', async (req, res, next) => {
+        if (req.url.startsWith('/api/')) {
+            return next()
+        }
+
         try {
             if (req.headers.accept?.includes('text/html')) {
                 const html = await render(req)

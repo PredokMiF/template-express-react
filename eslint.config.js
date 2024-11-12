@@ -36,6 +36,12 @@ export default tseslint.config(
             'indent': ['error', 4],
             'complexity': ['error', { 'max': 20 }],
             'curly': ['error', 'all'],
+            '@typescript-eslint/no-unused-vars': ['error', {
+                args: 'after-used',
+                argsIgnorePattern: '^(next)$',
+                caughtErrors: 'all',
+                ignoreRestSiblings: true,
+            }],
             'no-restricted-exports': ['error', {
                 'restrictDefaultExports': {
                     'direct': true,

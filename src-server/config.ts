@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve, join } from 'node:path'
 
@@ -23,28 +24,32 @@ export const isDev = !isProd
 
 dotenv.config({ path: join(PROJECT_ROOT_PATH, '.env') })
 
+const numberSchema = z.coerce.number().int().finite().safe()
+
 const configValidationResult = z.object({
+    HOST: z.string().default('0.0.0.0'),
+    PORT: numberSchema.positive().default(8080),
     SITE_URL: z.string().optional(),
-    HOST: z.string().default('localhost'),
-    PORT: z.coerce
-        .number()
-        .int()
-        .positive()
-        .finite()
-        .safe()
-        .default(8080),
+    TRUST_PROXY_COUNT: numberSchema.nonnegative().default(0),
+    MONGODB_URI: z.string(),
 }).transform((o) => {
     return ({
         siteUrl: o.SITE_URL || `http://localhost:${o.PORT}`,
         app: {
             host: o.HOST,
             port: o.PORT,
+            trustProxyCount: o.TRUST_PROXY_COUNT,
+        },
+        mongodb: {
+            uri: o.MONGODB_URI,
         },
     })
 }).safeParse(process.env)
 
 if (!configValidationResult.success) {
-    throw fromZodError(configValidationResult.error, { prefix: 'ENV config is failed' })
+    console.error(fromZodError(configValidationResult.error, { prefix: 'ENV config is failed' }).stack)
+
+    process.exit(1)
 }
 
 export const config = configValidationResult.data
